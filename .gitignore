@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 /RUNNING_PID
 /logs/
 /project/*-shim.sbt
 /project/project/
 /project/target/
 /target/
+=======
+target/
+.idea/
+scm-source.json
+>>>>>>> 4f76effcd4e58f1cb8dc81ff1ee2996b025530d7

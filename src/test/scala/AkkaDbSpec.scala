@@ -1,19 +1,19 @@
-import akka.actor.ActorSystem
 import akka.testkit.TestActorRef
 import com.akkadb.{AkkaDb, SetRequest}
-import org.scalatest.{BeforeAndAfterEach, FunSpecLike, Matchers}
+import org.specs2.mutable._
+import util.AkkaTestkitSpecs2Support
 
-class AkkaDbSpec extends FunSpecLike with Matchers with BeforeAndAfterEach{
-  implicit val system = ActorSystem()
+class AkkaDbSpec extends Specification {
+  sequential
 
-  describe("akkaDb") {
-    describe("given message SetRequest") {
-      it("should replace key/value into map") {
-        val actorRef = TestActorRef(new AkkaDb)
-        actorRef ! SetRequest("key", "value")
-        val akkaDb = actorRef.underlyingActor
-        akkaDb.map.get("key") should equal(Some("value"))
-      }
+  "akkaDb given message SetRequest" should {
+
+    "replace key/value into map" in new AkkaTestkitSpecs2Support {
+      val actorRef = TestActorRef(new AkkaDb)
+      val akkaDb = actorRef.underlyingActor
+
+      actorRef ! SetRequest("key", "value")
+      akkaDb.map.get("key") must be equalTo Some("value")
     }
   }
 }
